@@ -53,7 +53,8 @@ def build_cpp(source_file: str, binary_file: str, boost_dir: str):
                   -DBOOST_INTRUSIVE_VARIADIC_TEMPLATES {} {} {}'''.format(cppflags, cxxflags, ldflags)
         args = [cxx] + shlex.split(flags) + (
             ['-isystem', boost_dir, '-o', binary_file, source_file] +
-            ['-L', '%s/stage/lib' % boost_dir, '-Wl,-R', '%s/stage/lib' % boost_dir] )
+            ['-L', '%s/stage/lib' % boost_dir, '-Wl,-R', '%s/stage/lib' % boost_dir] +
+            ['-lboost_wave', '-lboost_thread', '-lboost_filesystem'] )
         subprocess.check_call(args)
 
 
